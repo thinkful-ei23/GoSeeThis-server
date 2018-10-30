@@ -3,12 +3,8 @@
 const mongoose = require('mongoose');
 
 const recommendationSchema = new mongoose.Schema({
-  title: String,
-  posterUrl: String,
-  overview: String,
-  release_date: String,
+  movieId: String,
   recDesc: String,
-  rating: Number,
   userId: {type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true}
 });
 
