@@ -1,0 +1,18 @@
+[
+  {
+    "firstName": "Joe",
+    "lastName": "Shmoe",
+    "username": "jshmoe",
+    "_id": "000000000000000000000001",
+    "password": "$2a$10$rtMHQiSB8LiZ.oW94zQUj.ewz8XYlgT.sjS6G0Y6z1SYRtRF0GP4m",
+    "recommendations": []
+  },
+  {
+    "firstName": "Jane",
+    "lastName": "Doe",
+    "username": "jdoe",
+    "id": "000000000000000000000002",
+    "password": "$2a$10$1pKByC/m5Y5qNxQ6MyRskuoREkcTMK2twQwO/5WbOHt.o4Ca9rNNu",
+    "recommendations": []
+  }
+]

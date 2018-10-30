@@ -8,7 +8,7 @@ const userSchema = new mongoose.Schema({
   lastName: { type: String },
   username: { type: String, required: true, unique: true },
   password: { type: String, required: true },
-  recommendations: { type: Array }
+  recommendations: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Recommendation'}]
 });
 
 userSchema.methods.validatePassword = function(password) {
