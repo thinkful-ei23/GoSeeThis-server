@@ -25,16 +25,16 @@ app.use(
   })
 );
 
-app.use(express.json());
-
-app.use('/api/users', userRouter);
-app.use('/api', authRouter);
-
 app.use(
   cors({
     origin: CLIENT_ORIGIN
   })
 );
+
+app.use(express.json());
+
+app.use('/api/users', userRouter);
+app.use('/api', authRouter);
 
 app.use((req, res, next) => {
   const err = new Error('Not Found');
