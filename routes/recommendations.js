@@ -59,7 +59,7 @@ router.get('/users/:id', (req, res, next) => {
 });
 
 router.get('/movies/:id', (req, res, next) => {
-  const movieId = req.param.id;
+  const movieId = req.params.id;
 
   return Recommendation.find({movieId})
     .sort({ updatedAt: 'desc' })
