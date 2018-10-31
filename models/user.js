@@ -1,0 +1,35 @@
+'use strict';
+
+const mongoose = require('mongoose');
+const bcrypt = require('bcryptjs');
+
+const userSchema = new mongoose.Schema({
+  firstName: { type: String },
+  lastName: { type: String },
+  username: { type: String, required: true, unique: true },
+  password: { type: String, required: true },
+  recommendations: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Recommendation'}]
+});
+
+userSchema.methods.validatePassword = function(password) {
+  return password === this.password;
+};
+
+userSchema.set('toObject', {
+  virtuals: true,
+  transform: (doc, ret) => {
+    delete ret._id;
+    delete ret.password;
+    delete ret.__v;
+  }
+});
+
+userSchema.methods.validatePassword = function(password) {
+  return bcrypt.compare(password, this.password);
+};
+
+userSchema.statics.hashPassword = function(password) {
+  return bcrypt.hash(password, 10);
+};
+
+module.exports = mongoose.model('User', userSchema);
