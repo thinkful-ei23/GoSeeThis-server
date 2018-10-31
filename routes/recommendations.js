@@ -43,7 +43,7 @@ router.get('/', (req, res, next) => {
     .catch(err => next(err));
 });
 
-router.delete('/:id', (req, res, next) => {
+router.delete('/:id', jwtAuth, (req, res, next) => {
   const { id } = req.params;
   const userId = req.user.id;
 
