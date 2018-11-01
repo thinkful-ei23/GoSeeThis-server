@@ -14,12 +14,15 @@ const jwtAuth = passport.authenticate('jwt', {
 router.post('/', jwtAuth, (req, res, next) => {
   const userId = req.user.id;
 
-  const { movieId, recDesc } = req.body;
+  const { movieId, recDesc, title, posterUrl, genre_ids } = req.body;
 
   const newRecommendation = {
     userId,
     movieId,
-    recDesc
+    recDesc,
+    title,
+    posterUrl,
+    genre_ids
   };
 
   return Recommendation.create(newRecommendation)
@@ -40,8 +43,7 @@ router.get('/', (req, res, next) => {
     .then(results => {
       if (results) {
         res.json(results);
-      }
-      else {
+      } else {
         next();
       }
     })
@@ -66,11 +68,11 @@ router.delete('/:id', jwtAuth, (req, res, next) => {
       res.status(204).end();
     })
     .catch(err => next(err));
-
+});
 router.get('/users/:id', (req, res, next) => {
   const userId = req.params.id;
 
-  return Recommendation.find({userId})
+  return Recommendation.find({ userId })
     .sort({ updatedAt: 'desc' })
     .then(results => {
       if (results) {
@@ -87,7 +89,7 @@ router.get('/users/:id', (req, res, next) => {
 router.get('/movies/:id', (req, res, next) => {
   const movieId = req.params.id;
 
-  return Recommendation.find({movieId})
+  return Recommendation.find({ movieId })
     .sort({ updatedAt: 'desc' })
     .then(results => {
       if (results) {
@@ -99,7 +101,6 @@ router.get('/movies/:id', (req, res, next) => {
     .catch(err => {
       next(err);
     });
-
 });
 
 module.exports = router;
