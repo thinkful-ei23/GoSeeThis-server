@@ -40,6 +40,7 @@ router.post('/', jwtAuth, (req, res, next) => {
 router.get('/', (req, res, next) => {
   Recommendation.find()
     .sort({ updatedAt: 'desc' })
+    .populate('userId', 'username firstName lastName')
     .then(results => {
       if (results) {
         res.json(results);
@@ -69,11 +70,13 @@ router.delete('/:id', jwtAuth, (req, res, next) => {
     })
     .catch(err => next(err));
 });
+
 router.get('/users/:id', (req, res, next) => {
   const userId = req.params.id;
 
   return Recommendation.find({ userId })
     .sort({ updatedAt: 'desc' })
+    .populate('userId', 'username firstName lastName')
     .then(results => {
       if (results) {
         res.json(results);
@@ -91,6 +94,7 @@ router.get('/movies/:id', (req, res, next) => {
 
   return Recommendation.find({ movieId })
     .sort({ updatedAt: 'desc' })
+    .populate('userId', 'username firstName lastName')
     .then(results => {
       if (results) {
         res.json(results);
