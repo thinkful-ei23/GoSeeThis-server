@@ -7,9 +7,11 @@ const recommendationSchema = new mongoose.Schema({
   title: String,
   posterUrl: String,
   genre_ids: [{type: Number}],
-  recDesc: String,
+  recDesc: {type: String, required: true},
   userId: {type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true},
 });
+
+recommendationSchema.index({movieId: 1, userId: 1}, {unique: true});
 
 recommendationSchema.set('timestamps', true);
 

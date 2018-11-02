@@ -15,7 +15,6 @@ router.post('/', jwtAuth, (req, res, next) => {
   const userId = req.user.id;
 
   const { movieId, recDesc, title, posterUrl, genre_ids } = req.body;
-
   const newRecommendation = {
     userId,
     movieId,
@@ -33,6 +32,10 @@ router.post('/', jwtAuth, (req, res, next) => {
         .json(result);
     })
     .catch(err => {
+      if (err.code === 11000) {
+        err = new Error('A recommendation for this movie already exists');
+        err.status = 400;
+      }
       next(err);
     });
 });
