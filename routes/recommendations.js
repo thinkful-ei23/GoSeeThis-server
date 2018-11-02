@@ -51,6 +51,27 @@ router.get('/', (req, res, next) => {
     .catch(err => next(err));
 });
 
+router.patch('/:id', jwtAuth, (req, res, next) => {
+  const { id } = req.params;
+  const userId = req.user.id;
+  const { recDesc } = req.body;
+  const updateRec = {
+    recDesc
+  };
+
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    const err = new Error('The `id` is not valid');
+    err.status = 400;
+    return next(err);
+  }
+
+  Recommendation.findOneAndUpdate({ _id: id, userId }, updateRec, { new: true })
+    .then(result => {
+      result ? res.json(result) : next();
+    })
+    .catch(err => next(err));
+});
+
 router.delete('/:id', jwtAuth, (req, res, next) => {
   const { id } = req.params;
   const userId = req.user.id;
