@@ -4,6 +4,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const passport = require('passport');
 const Follow = require('../models/follow');
+const User = require('../models/user');
 const router = express.Router();
 
 const jwtAuth = passport.authenticate('jwt', {
@@ -37,7 +38,19 @@ router.post('/follow', jwtAuth, (req, res, next) => {
 router.get('/following', jwtAuth, (req, res, next) => {
   const userId = req.user.id;
 
-  return Follow.find({follower: userId})
+  let following;
+
+  Follow.find({follower: userId})
+    .then(result => {
+      if (result) {
+        following = result.map(follow => follow.following);
+      } else {
+        next();
+      }
+    })
+    .then(() => {
+      return User.find({_id: {$in: following}});
+    })
     .then(result => {
       if (result) {
         res.json(result);
@@ -52,8 +65,19 @@ router.get('/following', jwtAuth, (req, res, next) => {
 
 router.get('/followers', jwtAuth, (req, res, next) => {
   const userId = req.user.id;
-  
-  return Follow.find({following: userId})
+  let followers;
+
+  Follow.find({following: userId})
+    .then(result => {
+      if (result) {
+        followers = result.map(follow => follow.follower);
+      } else {
+        next();
+      }
+    })
+    .then(() => {
+      return User.find({_id: {$in: followers}});
+    })
     .then(result => {
       if (result) {
         res.json(result);
