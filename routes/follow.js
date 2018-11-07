@@ -27,7 +27,7 @@ router.post('/follow', jwtAuth, (req, res, next) => {
     })
     .catch(err => {
       if (err.code === 11000) {
-        err = new Error('You are already following this user');
+        err = new Error('You already follow this user');
         err.status = 400;
       }
       next(err);

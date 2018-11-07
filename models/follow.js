@@ -9,5 +9,13 @@ const followSchema = new mongoose.Schema({
 
 followSchema.index({follower: 1, following: 1}, {unique: true});
 
+followSchema.set('toObject', {
+  virtuals: true,
+  versionKey: false,
+  transform: (doc, ret) => {
+    delete ret._id;
+  }
+});
+
 module.exports = mongoose.model('Follow', followSchema);
 
