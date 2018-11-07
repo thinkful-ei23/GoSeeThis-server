@@ -4,6 +4,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const passport = require('passport');
 const Recommendation = require('../models/recommendation');
+const Follow = require('../models/follow');
 const router = express.Router();
 
 const jwtAuth = passport.authenticate('jwt', {
@@ -122,6 +123,35 @@ router.get('/movies/:id', (req, res, next) => {
     .then(results => {
       if (results) {
         res.json(results);
+      } else {
+        next();
+      }
+    })
+    .catch(err => {
+      next(err);
+    });
+});
+
+router.get('/following', jwtAuth, (req, res, next) => {
+  const userId = req.user.id;
+  let follows;
+
+  Follow.find({follower: userId})
+    .then(result => {
+      if (result) {
+        follows = result.map(follow => follow.following);
+      } else {
+        next();
+      }
+    })
+    .then(() => {
+      return Recommendation.find({userId: {$in: follows}})
+        .sort({ updatedAt: 'desc'})
+        .populate('userId', 'username firstName lastName');
+    })
+    .then(result => {
+      if (result) {
+        res.json(result);
       } else {
         next();
       }
