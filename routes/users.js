@@ -1,11 +1,15 @@
 'use strict';
 
 const express = require('express');
-
+const passport = require('passport');
 const User = require('../models/user');
 
 const router = express.Router();
 
+const jwtAuth = passport.authenticate('jwt', {
+  session: false,
+  failWithError: true
+});
 router.post('/', (req, res, next) => {
   const requiredFields = ['username', 'password'];
   const missingField = requiredFields.find(field => !(field in req.body));
@@ -102,6 +106,17 @@ router.post('/', (req, res, next) => {
       }
       next(err);
     });
+});
+
+router.patch('/:id', jwtAuth, (req, res, next) => {
+  const id = req.params.id;
+  const { watchList } = req.body;
+  User.findOneAndUpdate({ _id: id }, { $push: { watchList } }, { new: true })
+    .then(result => {
+      console.log(result);
+      result ? res.json(result) : next();
+    })
+    .catch(err => next(err));
 });
 
 module.exports = router;
