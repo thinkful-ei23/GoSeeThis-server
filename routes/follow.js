@@ -90,4 +90,17 @@ router.get('/followers', jwtAuth, (req, res, next) => {
     });
 });
 
+router.delete('/unfollow', jwtAuth, (req, res, next) => {
+  const userId = req.user.id;
+  const { following } = req.body;
+
+  Follow.findOneAndRemove({ follower: userId, following})
+    .then(() => {
+      res.sendStatus(204);
+    })
+    .catch(err => {
+      next(err);
+    });
+});
+
 module.exports = router;
