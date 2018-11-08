@@ -108,15 +108,4 @@ router.post('/', (req, res, next) => {
     });
 });
 
-router.patch('/:id', jwtAuth, (req, res, next) => {
-  const id = req.params.id;
-  const { watchList } = req.body;
-  User.findOneAndUpdate({ _id: id }, { $push: { watchList } }, { new: true })
-    .then(result => {
-      console.log(result);
-      result ? res.json(result) : next();
-    })
-    .catch(err => next(err));
-});
-
 module.exports = router;
