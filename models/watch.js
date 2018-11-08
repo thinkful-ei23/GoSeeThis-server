@@ -10,7 +10,7 @@ const watchSchema = new mongoose.Schema({
   userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true }
 });
 
-watchSchema.index({ watchlist: { movieId: 1 }, userId: 1 }, { unique: true });
+watchSchema.index({ movieId: 1, userId: 1 }, { unique: true });
 
 watchSchema.set('timestamps', true);
 
