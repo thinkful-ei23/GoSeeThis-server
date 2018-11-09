@@ -7,6 +7,7 @@ const watchSchema = new mongoose.Schema({
   title: { type: String, required: true },
   poster_path: { type: String },
   genres: { type: Array },
+  overview: { type: String },
   userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true }
 });
 
