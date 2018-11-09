@@ -1,0 +1,18 @@
+[
+  {
+    "movieId": "7553",
+    "title": "Waiting...",
+    "posterUrl": "/3cyqShU9PGMtTpQgnV7Um3nEOmk.jpg",
+    "genre_ids": [35],
+    "recDesc": "If you've ever worked in a restaurant this is must watch",
+    "userId": "000000000000000000000001"
+  },
+  {
+    "movieId": "2493",
+    "title": "The Princess Bride",
+    "posterUrl": "/gpxjoE0yvRwIhFEJgNArtKtaN7S.jpg",
+    "genre_ids": [12, 10751, 14, 35, 10749],
+    "recDesc": "A nostalgic film with hilarious dialogues, sword-fighting, and rodents of unusual size.",
+    "userId": "000000000000000000000001"
+  }
+]

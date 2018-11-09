@@ -1,0 +1,15 @@
+[
+  {
+    "id": "5be4afa53cf1a049e82b51be",
+    "genres": [
+      {
+        "id": 35,
+        "name": "Comedy"
+      }
+    ],
+    "movieId": 7553,
+    "title": "Waiting...",
+    "poster_path": "/3cyqShU9PGMtTpQgnV7Um3nEOmk.jpg",
+    "userId": "5be4999654d8f20bf0ac320c"
+  }
+]
