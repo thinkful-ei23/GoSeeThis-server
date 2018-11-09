@@ -13,13 +13,15 @@ const jwtAuth = passport.authenticate('jwt', {
 
 router.post('/:id', jwtAuth, (req, res, next) => {
   const id = req.params.id;
-  const { movieId, title, poster_path, genres } = req.body;
+  const { movieId, title, poster_path, genres, overview } = req.body;
+  console.log(req.body);
   const newWatchItem = {
     movieId,
     title,
     poster_path,
     genres,
-    userId: id
+    userId: id,
+    overview
   };
   Watch.create(newWatchItem)
     .then(result => {
