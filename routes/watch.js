@@ -32,7 +32,7 @@ router.post('/:id', jwtAuth, (req, res, next) => {
     })
     .catch(err => {
       if (err.code === 11000) {
-        err = new Error('A recommendation for this movie already exists');
+        err = new Error('This movie is already in the user`s watchlist');
         err.status = 400;
       }
       next(err);

@@ -10,11 +10,11 @@
     "firstName": "Jane",
     "lastName": "Doe",
     "username": "jdoe",
-    "id": "000000000000000000000002",
+    "_id": "000000000000000000000002",
     "password": "$2a$10$1pKByC/m5Y5qNxQ6MyRskuoREkcTMK2twQwO/5WbOHt.o4Ca9rNNu"
   },
   {
-    "id": "5be4999654d8f20bf0ac320c",
+    "_id": "5be4999654d8f20bf0ac320c",
     "username": "TheMovieWhisperer",
     "password": "$2a$10$PnPeUnoOq./AW85wFd2IaOGkCbbrXSTLqrnVzTqDVdd19.gn83UQq",
     "firstName": "David",

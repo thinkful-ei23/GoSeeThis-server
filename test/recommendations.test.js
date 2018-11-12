@@ -150,7 +150,7 @@ describe('Go See This - Recommendations', function() {
   });
 
   describe('PATCH /api/recommendations', function() {
-    it.only('should find and update a recommendation when given valid data', function() {
+    it('should find and update a recommendation when given valid data', function() {
       const updateRec = { recDesc: 'Test Update' };
 
       let rec;
