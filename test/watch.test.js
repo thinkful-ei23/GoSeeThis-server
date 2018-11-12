@@ -126,7 +126,7 @@ describe('Go See This - WatchList', function() {
           expect(res).to.have.status(400);
           expect(res).to.be.json;
           expect(res.body).to.be.a('object');
-          expect(res.body.message).to.equal('You already follow this user');
+          expect(res.body.message).to.equal('This movie is already in the user`s watchlist');
         });
     });
   });
