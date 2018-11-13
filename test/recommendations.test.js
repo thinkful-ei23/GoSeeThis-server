@@ -116,7 +116,7 @@ describe('Go See This - Recommendations', function() {
       });
     });
 
-    it('should return a list with the correct fields', function() {
+    it.only('should return a list with the correct fields', function() {
       return Promise.all([
         Recommendation.find({ userId: user.id }).sort('username'),
         chai
@@ -140,15 +140,17 @@ describe('Go See This - Recommendations', function() {
             'posterUrl',
             'genre_ids'
           );
-          expect(item.id).to.equal(data[i].id);
-          expect(item.title).to.equal(data[i].title);
-          expect(new Date(item.createdAt)).to.eql(data[i].createdAt);
-          expect(new Date(item.updatedAt)).to.eql(data[i].updatedAt);
-          expect(item.movieId).to.equal(data[i].movieId);
-          expect(item.recDesc).to.equal(data[i].recDesc);
-          expect(item.posterUrl).to.equal(data[i].posterUrl);
-          expect(item.genre_ids).to.eql(data[i].genre_ids);
-          expect(item.userId.id).to.equal(data[i].userId.toString());
+          if (item.userId.id === user.id) {
+            expect(item.id).to.equal(data[i].id);
+            expect(item.title).to.equal(data[i].title);
+            expect(new Date(item.createdAt)).to.eql(data[i].createdAt);
+            expect(new Date(item.updatedAt)).to.eql(data[i].updatedAt);
+            expect(item.movieId).to.equal(data[i].movieId);
+            expect(item.recDesc).to.equal(data[i].recDesc);
+            expect(item.posterUrl).to.equal(data[i].posterUrl);
+            expect(item.genre_ids).to.eql(data[i].genre_ids);
+            expect(item.userId.id).to.equal(data[i].userId.toString());
+          }
         });
       });
     });
@@ -328,8 +330,9 @@ describe('Go See This - Recommendations', function() {
   describe('GET /api/recommendations/following', (req, res, next) => {
     it('should find users that are being followed', function() {
       let data;
-      let userId = '000000000000000000000001';
-      return Follow.findOne()
+      let userId = '000000000000000000000002';
+
+      return Follow.findOne({ following: userId })
         .then(_data => {
           data = _data;
           return chai
@@ -339,11 +342,24 @@ describe('Go See This - Recommendations', function() {
         })
         .then(res => {
           expect(data).to.be.a('object');
-          expect(data.follower.toString()).to.equal('5be4999654d8f20bf0ac320c');
+          expect(data.follower.toString()).to.equal('000000000000000000000001');
           expect(data.following.toString()).to.equal(userId);
           expect(res).to.have.status(200);
           expect(res).to.be.json;
           expect(res.body).to.be.a('array');
+          res.body.forEach(rec => {
+            expect(rec).to.have.keys(
+              'title',
+              'id',
+              'userId',
+              'createdAt',
+              'updatedAt',
+              'movieId',
+              'recDesc',
+              'posterUrl',
+              'genre_ids'
+            );
+          });
         });
     });
   });
