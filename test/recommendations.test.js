@@ -118,7 +118,7 @@ describe('Go See This - Recommendations', function() {
 
     it('should return a list with the correct fields', function() {
       return Promise.all([
-        Recommendation.find({ userId: user.id }).sort('username'),
+        Recommendation.find().sort('username'),
         chai
           .request(app)
           .get('/api/recommendations')
