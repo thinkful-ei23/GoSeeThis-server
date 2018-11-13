@@ -103,4 +103,76 @@ describe('GoSeeThis - Follows', function() {
         });
     });
   });
+
+  describe('GET /api/following', function() {
+    it('Should retrieve and return an array of followed users', function() {
+      let res;
+  
+      return chai
+        .request(app)
+        .get('/api/following')
+        .set('Authorization', `Bearer ${token}`)
+        .then(_res => {
+          res = _res;
+          expect(res).to.have.status(200);
+          expect(res).to.be.json;
+          expect(res.body).to.be.a('array');
+          expect(res.body).to.have.length(1);
+          expect(res.body[0]).to.be.a('object');
+          expect(res.body[0]).to.have.keys(
+            'id',
+            'firstName',
+            'lastName',
+            'username'
+          );
+        });
+    });
+  });
+
+  describe('GET /api/followers', function() {
+    it('Should retrieve and return an array of following users', function() {
+      let res;
+
+      return chai
+        .request(app)
+        .get('/api/followers')
+        .set('Authorization', `Bearer ${token}`)
+        .then(_res => {
+          res = _res;
+          expect(res).to.have.status(200);
+          expect(res).to.be.json;
+          expect(res.body).to.be.a('array');
+          expect(res.body).to.have.length(1);
+          expect(res.body[0]).to.be.a('object');
+          expect(res.body[0]).to.have.keys(
+            'id',
+            'firstName',
+            'lastName',
+            'username'
+          );
+        });
+    });
+  });
+
+  describe('DELETE /api/unfollow', function() {
+    it('Should delete the appropriate following relationship from the follow collection', function() {
+      let del = {};
+      return Follow.findOne({ follower: user.id })
+        .then(data => {
+          del.following = data.following;
+          return chai
+            .request(app)
+            .delete('/api/unfollow')
+            .set('Authorization', `Bearer ${token}`)
+            .send(del)
+            .then(res => {
+              expect(res).to.have.status(204);
+              return Follow.findOne({ follower: user.id, following: del.following });
+            })
+            .then(data => {
+              expect(data).to.equal(null);
+            });
+        });
+    });
+  });
 });
