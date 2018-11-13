@@ -116,7 +116,7 @@ describe('Go See This - Recommendations', function() {
       });
     });
 
-    it.only('should return a list with the correct fields', function() {
+    it('should return a list with the correct fields', function() {
       return Promise.all([
         Recommendation.find({ userId: user.id }).sort('username'),
         chai
