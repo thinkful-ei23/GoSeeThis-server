@@ -1,45 +1,59 @@
-# Thinkful Backend Template
+# GoSeeThis
+Share your favorite movies with fellow film buffs, put together that watchlist you've been scheming on for the past 3 years, and discover new gems with GoSeeThis. Check out the **[live app!](https://dashboard.heroku.com/apps/goseethis-client)**
 
-A template for developing and deploying Node.js apps.
+## Introduction
+How many times have you been interested in a movie, newly released or otherwise, only to write it off because a few of your friends decided the movie wasn't worth watching. If you were to ask them whether they'd actually seen the movie, they'd probably tell you no, followed by a remark that "the movie got some scathing reviews on Rotten Tomatoes."
 
-## Getting started
+This scenario points to an interesting phenomenon: **our impressions of a work, whether in film or television, are often mediated by public opinion, which in turn is heavily influenced by the objective critique of a select few, whose tastes have been groomed in a cultural environment completely seperate from our own.** GoSeeThis directly addresses this phenomenon, and aims to establish the point that everyone's tastes are unique. GoSeeThis is an app that allows users to make recommendations for the movies they **personally feel ARE worth watching.** Where sites like Rotten Tomatoes work to establish objective absolutes, we aim to reinforce the subjective, human perspective that shapes personal tastes in media consumption, and provide an open source space for avid movie watchers to share these perspectives with others, in hopes that they might build connections with those that support their views, and/or challenge their opinions. At its core, GoSeeThis is about **exploration, expression, and discovery in film.**
 
-### Setting up a project
+## How it Works
+Our application uses the Movie Database's (tMDB) extensive film data library to populate the user's title searches with relevant metadata via their public web API. Users can visit movie pages, add movies to a personal watchlist, and create recommendations on the fly. Recommendations posted by all users are accessible through a global feed on the user's dashboard. However, we wanted to give the user more control over how they experience the app by allowing them to filter the feed by title and genre. More importantly, users can follow their favorite recommenders and develop a more personalized, nuanced network that caters to their personal tastes. All of our app's features contribute to our goal of fostering a dynamic, user-driven environment that encourages, yup. You guessed it. **Exploration, expression, and discovery.**
 
-* Move into your projects directory: `cd ~/YOUR_PROJECTS_DIRECTORY`
-* Clone this repository: `git clone https://github.com/Thinkful-Ed/backend-template YOUR_PROJECT_NAME`
-* Move into the project directory: `cd YOUR_PROJECT_NAME`
-* Install the dependencies: `npm install`
-* Create a new repo on GitHub: https://github.com/new
-    * Make sure the "Initialize this repository with a README" option is left unchecked
-* Update the remote to point to your GitHub repository: `git remote set-url origin https://github.com/YOUR_GITHUB_USERNAME/YOUR_REPOSITORY_NAME`
+## Client-Side
+The client-side GitHub repo can be found [here](https://github.com/thinkful-ei23/GoSeeThis-Client).
 
-### Working on the project
+## Tech Stack
+### MERN
+* MongoDB
+* Express.js
+* React
+* Node.js
 
-* Move into the project directory: `cd ~/YOUR_PROJECTS_DIRECTORY/YOUR_PROJECT_NAME`
-* Run the development task: `npm start`
-    * Starts a server running at http://localhost:8080
-    * Automatically restarts when any of your files change
+### Client-side dependencies
+* redux
+* redux-form
+* react-router
+* react-redux
 
-## Databases
+### Server-side dependencies
+* cors
+* passport
+* mongoose
+* jwt
 
-By default, the template is configured to connect to a MongoDB database using Mongoose.  It can be changed to connect to a PostgreSQL database using Knex by replacing any imports of `db-mongoose.js` with imports of `db-knex.js`, and uncommenting the Postgres `DATABASE_URL` lines in `config.js`.
+## Features List
+### V1
+* Add a movie recommendation (from add form and from movie page)
+* Global recommendations feed (ordered by most recent)
+* User profile page
+  * User recommendations
+  * Follow a user
+* Following recommendations feed (ordered by most recent)
+* MyProfile page
+  * My recommendations list
+  * Following/Followers lists
+  * My watchlist
+* Add (and remove) a movie from user watchlist
+* Feed filter (by title and by genre)
+* Movie Search Bar
 
-## Deployment
+### V2
+* User recommendations become multimedia (television, books, YouTube videos, etc).
+* Following recommendations feed ordered by level of priority (weighted recs).
+* Feature movie trailers on movie page
 
-Requires the [Heroku CLI client](https://devcenter.heroku.com/articles/heroku-command-line).
-
-### Setting up the project on Heroku
-
-* Move into the project directory: `cd ~/YOUR_PROJECTS_DIRECTORY/YOUR_PROJECT_NAME`
-* Create the Heroku app: `heroku create PROJECT_NAME`
-
-* If your backend connects to a database, you need to configure the database URL:
-    * For a MongoDB database: `heroku config:set DATABASE_URL=mongodb://USERNAME:PASSWORD@HOST:PORT/DATABASE_NAME`
-    * For a PostgreSQL database: `heroku config:set DATABASE_URL=postgresql://USERNAME:PASSWORD@HOST:PORT/DATABASE_NAME`
-
-* If you are creating a full-stack app, you need to configure the client origin: `heroku config:set CLIENT_ORIGIN=https://www.YOUR_DEPLOYED_CLIENT.com`
-
-### Deploying to Heroku
-
-* Push your code to Heroku: `git push heroku master`
+## Contributors
+* [Tarik Desire](https://github.com/tdesire)
+* [David Folks](https://github.com/DFolks)
+* [David Graves](https://github.com/DaGraves)
+* [Ryan Ureta](https://github.com/rcureta)
