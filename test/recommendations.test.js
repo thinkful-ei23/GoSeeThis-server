@@ -113,6 +113,8 @@ describe('Go See This - Recommendations', function() {
         expect(res).to.have.status(200);
         expect(res).to.be.json;
         expect(res.body).to.be.a('array');
+        expect(data).to.be.a('array');
+        expect(data.length).to.be.equal(res.body.length);
       });
     });
 
@@ -232,10 +234,10 @@ describe('Go See This - Recommendations', function() {
     });
 
     it('should return an error with an invalid Id', function() {
-      let rec;
+      let data;
       return Recommendation.findOne()
-        .then(_rec => {
-          rec = _rec;
+        .then(_data => {
+          data = _data;
           return chai
             .request(app)
             .delete('/api/recommendations/Not-Valid')
@@ -248,15 +250,15 @@ describe('Go See This - Recommendations', function() {
     });
   });
 
-  describe('GET /api/recommendations/users/:id', (req, res, next) => {
-    it('should return correct recommendations', function() {
+  describe('GET /api/recommendations/users/:id', function() {
+    it.only('should return correct recommendations', function() {
       let data;
       return Recommendation.find({ userId: '000000000000000000000001' })
         .then(_data => {
-          data = _data[0];
+          data = _data;
           return chai
             .request(app)
-            .get(`/api/recommendations/users/${data.userId}`)
+            .get(`/api/recommendations/users/${user.id}`)
             .set('Authorization', `Bearer ${token}`);
         })
         .then(res => {
@@ -275,23 +277,23 @@ describe('Go See This - Recommendations', function() {
               'posterUrl',
               'genre_ids'
             );
-            expect(res.body[0].id).to.equal(data.id);
-            expect(res.body[0].title).to.equal(data.title);
-            expect(new Date(res.body[0].createdAt)).to.eql(data.createdAt);
-            expect(res.body[0].movieId).to.equal(data.movieId);
-            expect(res.body[0].recDesc).to.equal(data.recDesc);
-            expect(res.body[0].posterUrl).to.equal(data.posterUrl);
-            expect(res.body[0].genre_ids).to.eql(data.genre_ids);
-            expect(res.body[0].userId.id).to.equal(data.userId.toString());
+            expect(res.body[i].id).to.equal(data[i].id);
+            expect(res.body[i].title).to.equal(data[i].title);
+            expect(new Date(res.body[i].createdAt)).to.eql(data[i].createdAt);
+            expect(res.body[i].movieId).to.equal(data[i].movieId);
+            expect(res.body[i].recDesc).to.equal(data[i].recDesc);
+            expect(res.body[i].posterUrl).to.equal(data[i].posterUrl);
+            expect(res.body[i].genre_ids).to.eql(data[i].genre_ids);
+            expect(res.body[i].userId.id).to.equal(data[i].userId.toString());
           });
         });
     });
-    describe('GET /api/recommendations/movies/:id', (req, res, next) => {
+    describe('GET /api/recommendations/movies/:id', function() {
       it('should return correct recommendations', function() {
         let data;
         return Recommendation.find({ userId: '000000000000000000000001' })
           .then(_data => {
-            data = _data[0];
+            data = _data;
             return chai
               .request(app)
               .get(`/api/recommendations/movies/${data.movieId}`)
@@ -313,21 +315,21 @@ describe('Go See This - Recommendations', function() {
                 'posterUrl',
                 'genre_ids'
               );
-              expect(res.body[0].id).to.equal(data.id);
-              expect(res.body[0].title).to.equal(data.title);
-              expect(new Date(res.body[0].createdAt)).to.eql(data.createdAt);
-              expect(res.body[0].movieId).to.equal(data.movieId);
-              expect(res.body[0].recDesc).to.equal(data.recDesc);
-              expect(res.body[0].posterUrl).to.equal(data.posterUrl);
-              expect(res.body[0].genre_ids).to.eql(data.genre_ids);
-              expect(res.body[0].userId.id).to.equal(data.userId.toString());
+              expect(res.body[i].id).to.equal(data[i].id);
+              expect(res.body[i].title).to.equal(data[i].title);
+              expect(new Date(res.body[i].createdAt)).to.eql(data[i].createdAt);
+              expect(res.body[i].movieId).to.equal(data[i].movieId);
+              expect(res.body[i].recDesc).to.equal(data[i].recDesc);
+              expect(res.body[i].posterUrl).to.equal(data[i].posterUrl);
+              expect(res.body[i].genre_ids).to.eql(data[i].genre_ids);
+              expect(res.body[i].userId.id).to.equal(data[i].userId.toString());
             });
           });
       });
     });
   });
 
-  describe('GET /api/recommendations/following', (req, res, next) => {
+  describe('GET /api/recommendations/following', function() {
     it('should find users that are being followed', function() {
       let data;
       let userId = '000000000000000000000002';
