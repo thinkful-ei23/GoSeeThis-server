@@ -1,5 +1,5 @@
 # GoSeeThis
-Share your favorite movies with fellow film buffs, put together that watchlist you've been scheming on for the past 3 years, and discover new gems with GoSeeThis. Check out the **[live app!](https://dashboard.heroku.com/apps/goseethis-client)**
+Share your favorite movies with fellow film buffs, put together that watchlist you've been scheming on for the past 3 years, and discover new gems with GoSeeThis. Check out the **[live app!](https://goseethis-client.herokuapp.com/)**
 
 ## Introduction
 How many times have you been interested in a movie, newly released or otherwise, only to write it off because a few of your friends decided the movie wasn't worth watching. If you were to ask them whether they'd actually seen the movie, they'd probably tell you no, followed by a remark that "the movie got some scathing reviews on Rotten Tomatoes."
