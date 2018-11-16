@@ -1,4 +1,6 @@
-# GoSeeThis
+![alt text](https://i.imgur.com/vh06Bf6.png)
+
+
 Share your favorite movies with fellow film buffs, put together that watchlist you've been scheming on for the past 3 years, and discover new gems with GoSeeThis. Check out the **[live app!](https://goseethis-client.herokuapp.com/)**
 
 ## Introduction
