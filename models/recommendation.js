@@ -4,9 +4,14 @@ const mongoose = require('mongoose');
 
 const recommendationSchema = new mongoose.Schema({
   movieId: String,
-  recDesc: String,
-  userId: {type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true}
+  title: String,
+  posterUrl: String,
+  genre_ids: [{type: Number}],
+  recDesc: {type: String, required: true},
+  userId: {type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true},
 });
+
+recommendationSchema.index({movieId: 1, userId: 1}, {unique: true});
 
 recommendationSchema.set('timestamps', true);
 
