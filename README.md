@@ -64,4 +64,4 @@ The client-side GitHub repo can be found [here](https://github.com/thinkful-ei23
 ## Social Media
 
 * **[Twitter](https://twitter.com/GoSeeThisApp1)**
-* **[ProductHunt](https://www.producthunt.com/posts/goseethis)**
+* **[Product Hunt](https://www.producthunt.com/posts/goseethis)**
